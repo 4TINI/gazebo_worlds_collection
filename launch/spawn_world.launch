@@ -1,0 +1,22 @@
+<launch>
+
+    <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find gazebo_worlds_collection)/models"/>
+    <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find gazebo_worlds_collection)/models"/>
+    
+    <arg name="gazebo_world_name" default="cafe.world"/>
+    <arg name="gazebo_world_path" default="$(find gazebo_worlds_collection)/worlds/"/>
+    <arg name="launch_gazebo" default="true"/>
+    <arg name="launch_gazebo_gui" default="true"/>
+
+    <!-- Launch Gazebo -->
+    <include if="$(eval launch_gazebo)" file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(arg gazebo_world_path)$(arg gazebo_world_name)"/>
+        <arg name="debug" value="false" />
+        <arg name="verbose" value="false" />
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="headless" value="false"/>
+        <arg name="gui" value="$(arg launch_gazebo_gui)"/>     
+    </include>
+
+</launch>
